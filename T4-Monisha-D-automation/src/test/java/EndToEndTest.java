@@ -1,62 +1,78 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 
-public class OctopusAutomation {
+public class EndToEndTest {
 
     public static void main(String[] args) {
 
-        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        System.setProperty("webdriver.chrome.driver", 
+                "C:\\Users\\YourName\\Downloads\\chromedriver.exe");
+
         WebDriver driver = new ChromeDriver();
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
+        try {
 
-        //  Open application
-        driver.get("https://dev.octopussaas.com/");
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+            driver.manage().window().maximize();
 
-        //  Login
-        driver.findElement(By.id("email")).sendKeys("henry@test.com");
-        driver.findElement(By.id("password")).sendKeys("Nayan123@");
-        driver.findElement(By.xpath("//button[contains(text(),'Login')]")).click();
+            // Open application
+            driver.get("https://dev.octopussaas.com/");
 
-        //  Add New Generator
-        driver.findElement(By.xpath("//button[contains(text(),'Add New')]")).click();
-        driver.findElement(By.xpath("//span[text()='Generator']")).click();
+            // Login
+            driver.findElement(By.id("email")).sendKeys("henry@test.com");
+            driver.findElement(By.id("password")).sendKeys("Nayan123@");
+            driver.findElement(By.xpath("//button[contains(text(),'Login')]")).click();
 
-        driver.findElement(By.name("generatorName"))
-              .sendKeys("Test Generator Automation");
+            //  Login Validation
+            if (driver.getCurrentUrl().contains("dashboard")) {
+                System.out.println("Login Successful");
+            } else {
+                System.out.println("Login Failed");
+            }
 
-        driver.findElement(By.name("internalAccountNumber"))
-              .sendKeys("INT-001");
+            // Add New Generator
+            driver.findElement(By.xpath("//button[contains(text(),'Add New')]")).click();
+            driver.findElement(By.xpath("//span[text()='Generator']")).click();
 
-        driver.findElement(By.xpath("//button[contains(text(),'Add New Generator')]"))
-              .click();
+            driver.findElement(By.name("generatorName"))
+                    .sendKeys("Test Generator Automation");
 
-        // Assign Route (example)
-        driver.findElement(By.xpath("//button[contains(text(),'Route Assignment')]"))
-              .click();
+            driver.findElement(By.name("internalAccountNumber"))
+                    .sendKeys("INT-001");
 
-        driver.findElement(By.xpath("//button[contains(text(),'Add Service')]"))
-              .click();
+            driver.findElement(By.xpath("//button[contains(text(),'Add New Generator')]"))
+                    .click();
 
-        //  Update Price Book (example)
-        driver.findElement(By.xpath("//button[contains(text(),'Price Book')]"))
-              .click();
+            // Assign Route
+            driver.findElement(By.xpath("//button[contains(text(),'Route Assignment')]"))
+                    .click();
 
-        driver.findElement(By.name("price")).clear();
-        driver.findElement(By.name("price")).sendKeys("500");
+            driver.findElement(By.xpath("//button[contains(text(),'Add Service')]"))
+                    .click();
 
-        driver.findElement(By.xpath("//button[contains(text(),'Save')]"))
-              .click();
+            // Update Price Book
+            driver.findElement(By.xpath("//button[contains(text(),'Price Book')]"))
+                    .click();
 
-        //  Logout
-        driver.findElement(By.xpath("//div[contains(text(),'HB')]")).click();
-        driver.findElement(By.xpath("//button[contains(text(),'Logout')]")).click();
+            driver.findElement(By.name("price")).clear();
+            driver.findElement(By.name("price")).sendKeys("500");
 
-        driver.quit();
+            driver.findElement(By.xpath("//button[contains(text(),'Save')]"))
+                    .click();
+
+            // Logout
+            driver.findElement(By.xpath("//div[contains(text(),'HB')]")).click();
+            driver.findElement(By.xpath("//button[contains(text(),'Logout')]")).click();
+
+        } catch (Exception e) {
+
+            System.out.println("Test Failed: " + e.getMessage());
+
+        } finally {
+
+            driver.quit();
+        }
     }
 }
-
