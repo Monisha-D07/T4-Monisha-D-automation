@@ -14,15 +14,15 @@ public class OctopusAutomation {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
 
-        // 1️⃣ Open application
+        //  Open application
         driver.get("https://dev.octopussaas.com/");
 
-        // 2️⃣ Login
+        //  Login
         driver.findElement(By.id("email")).sendKeys("henry@test.com");
         driver.findElement(By.id("password")).sendKeys("Nayan123@");
         driver.findElement(By.xpath("//button[contains(text(),'Login')]")).click();
 
-        // 3️⃣ Add New Generator
+        //  Add New Generator
         driver.findElement(By.xpath("//button[contains(text(),'Add New')]")).click();
         driver.findElement(By.xpath("//span[text()='Generator']")).click();
 
@@ -35,14 +35,14 @@ public class OctopusAutomation {
         driver.findElement(By.xpath("//button[contains(text(),'Add New Generator')]"))
               .click();
 
-        // 4️⃣ Assign Route (example)
+        // Assign Route (example)
         driver.findElement(By.xpath("//button[contains(text(),'Route Assignment')]"))
               .click();
 
         driver.findElement(By.xpath("//button[contains(text(),'Add Service')]"))
               .click();
 
-        // 5️⃣ Update Price Book (example)
+        //  Update Price Book (example)
         driver.findElement(By.xpath("//button[contains(text(),'Price Book')]"))
               .click();
 
@@ -52,10 +52,11 @@ public class OctopusAutomation {
         driver.findElement(By.xpath("//button[contains(text(),'Save')]"))
               .click();
 
-        // 6️⃣ Logout
+        //  Logout
         driver.findElement(By.xpath("//div[contains(text(),'HB')]")).click();
         driver.findElement(By.xpath("//button[contains(text(),'Logout')]")).click();
 
         driver.quit();
     }
 }
+
